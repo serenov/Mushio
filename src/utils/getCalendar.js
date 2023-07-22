@@ -1,13 +1,19 @@
 export default (month, year) => {
-  const numDays = new Date(year, month, 0).getDate();
+  const daysWithDayNames = [];
 
-  const days = [];
+  const lastDayOfMonth = new Date(year, month, 0).getDate();
 
-  for (let day = 1; day <= numDays; day++) {
-    const date = new Date(year, month, day);
-    const name = date.toLocaleDateString("en-US", { weekday: "short" });
-    days.push({ name, day });
+  for (let day = 1; day <= lastDayOfMonth; day++) {
+    const date = new Date(year, month - 1, day);
+
+    const dayNumber = date.getDay();
+
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    const name = dayNames[dayNumber];
+
+    daysWithDayNames.push({ name, day });
   }
 
-  return days;
+  return daysWithDayNames;
 };

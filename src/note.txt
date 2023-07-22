@@ -1,0 +1,8 @@
+1) arrows marks padding
+2) arrows button
+3) months full form
+4) year short full
+5) Dates spacing
+6) sticky
+7) most recent records
+8) next button spacing

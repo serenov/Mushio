@@ -9,6 +9,8 @@ import scrollIntoView from "../../../../utils/scrollIntoView";
 
 import store from "../../../../Redux/store";
 
+import getCalendar from "../../../../utils/getCalendar";
+
 const Cell = ({ dayName, dayNum, isToday, setDay, reference }) => {
   const addulation = isToday ? "bg-pr-500" : "hover:bg-pr-200";
   return (
@@ -29,9 +31,13 @@ const Cell = ({ dayName, dayNum, isToday, setDay, reference }) => {
   );
 };
 
-export default function Calendar({ calendar }) {
+export default function Calendar() {
   const day = useSelector((store) => store.date.day);
   const month = useSelector((store) => store.date.month);
+
+  const year = store.getState().date.year;
+
+  const calendar = getCalendar(month, year);
 
   const dispatch = useDispatch();
 
