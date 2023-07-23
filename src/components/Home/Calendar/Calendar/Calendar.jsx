@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import request from "../../../../API/request";
@@ -35,6 +35,8 @@ export default function Calendar() {
   const day = useSelector((store) => store.date.day);
   const month = useSelector((store) => store.date.month);
 
+  const initialRender = useRef(true);
+
   const year = store.getState().date.year;
 
   const calendar = getCalendar(month, year);
@@ -49,25 +51,23 @@ export default function Calendar() {
   };
 
   const apiCall = () => {
+    if (initialRender) return;
     const year = store.getState().date.year;
     const dateKey = `_${day}${month}${year}`;
     const res = request(dateKey);
-    // console.log(
-    //   res,
-    //   dateKey,
-    //   "this is the response that i have gotten from the API"
-    // );
+
     dispatch(Actions.recUpdate(res));
   };
 
   useEffect(apiCall, [day]);
 
   useEffect(() => {
-    dispatch(Actions.setDay(null));
+    if (!initialRender.current) dispatch(Actions.setDay(null));
   }, [month]);
 
   useEffect(() => {
     scrollIntoView(containerDiv, activeDay);
+    initialRender.current = false;
   }, []);
 
   return (

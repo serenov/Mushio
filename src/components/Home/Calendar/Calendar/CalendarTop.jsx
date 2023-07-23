@@ -29,7 +29,7 @@ export default function CalendarTop() {
   return (
     <div
       id="calendar-top"
-      className="flex-[3] flex justify-between items-center py-3"
+      className="flex-[3] flex justify-between items-center py-3 px-3"
     >
       <span onClick={() => handleClick(month - 1)}>
         <img height={18} width={18} src="/src/assets/chevron-l.svg" alt="" />

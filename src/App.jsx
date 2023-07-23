@@ -36,7 +36,7 @@ function App() {
   };
 
   return (
-    <div className="relative flex flex-col border-2 w-full h-[100dvh] overflow-hidden">
+    <div className="relative flex flex-col w-full h-[100dvh] overflow-hidden">
       {currSlide.current !== -1 && (
         <>
           <Screen className="flex-[10]" componentArray={componentArray} />

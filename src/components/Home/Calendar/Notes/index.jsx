@@ -19,9 +19,13 @@ export default () => {
           return <Note key={index} record={record} />;
         })}
       {records.length === 0 && day && (
-        <div className="grid place-content-center"> No records found</div>
+        <div className="grid place-content-center fade-in">
+          No records found
+        </div>
       )}
-      {!day && <div className="grid place-content-center">Select a day</div>}
+      {!day && (
+        <div className="grid place-content-center fade-in">Select a day</div>
+      )}
     </div>
   );
 };
