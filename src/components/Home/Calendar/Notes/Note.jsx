@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
 import images from "../../../../API/images";
 import bgcolor from "../../../../API/bgcolor";
@@ -19,12 +19,25 @@ function Hashtags({ tags }) {
 }
 
 export default function Note({ record }) {
+  const divRef = useRef(null);
+  if (divRef.current) {
+    divRef.current.classList.add("fade-in");
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (divRef.current) divRef.current.classList.remove("fade-in");
+    }, 400);
+  });
   const Image = ({ imgObj }) => (
     <img width="50" height="50" src={imgObj.src} alt={imgObj.alt} />
   );
 
   return (
-    <div className="flex font-rob mx-[14px] br rounded-[8px] py-[20px] px-[23px] sh fade-in">
+    <div
+      ref={divRef}
+      className="flex font-rob mx-[14px] br rounded-[8px] py-[20px] px-[23px] sh"
+    >
       <div className="flex flex-col flex-[6] overflow-hidden">
         <div className="text-18xl font-bold">{record.title}</div>
         <div className="text-12xl my-1">{record.description}</div>
