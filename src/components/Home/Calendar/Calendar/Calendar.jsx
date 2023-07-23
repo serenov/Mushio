@@ -18,7 +18,7 @@ const Cell = ({ dayName, dayNum, isToday, setDay, reference }) => {
       id={isToday ? "calendar_dates" : ""}
       className={
         addulation +
-        " active:bg-pr-750 min-w-[35px] p-[4px] font-rob flex flex-col cursor-pointer justify-center items-center rounded-[8px]"
+        " active:bg-pr-750 min-w-[35px] p-[4px] font-rob flex flex-col cursor-pointer justify-center items-center rounded-[8px] fade-in"
       }
       onClick={() => {
         if (!isToday) setDay(dayNum);
@@ -51,8 +51,7 @@ export default function Calendar() {
   };
 
   const apiCall = () => {
-    if (initialRender) return;
-    const year = store.getState().date.year;
+    if (initialRender.current) return;
     const dateKey = `_${day}${month}${year}`;
     const res = request(dateKey);
 
@@ -62,7 +61,9 @@ export default function Calendar() {
   useEffect(apiCall, [day]);
 
   useEffect(() => {
-    if (!initialRender.current) dispatch(Actions.setDay(null));
+    if (!initialRender.current) {
+      dispatch(Actions.setDay(null));
+    }
   }, [month]);
 
   useEffect(() => {

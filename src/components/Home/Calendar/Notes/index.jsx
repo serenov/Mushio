@@ -7,7 +7,7 @@ import Note from "./Note";
 
 export default () => {
   const records = useSelector((state) => state.records);
-  const day = store.getState().date.day;
+  const day = useSelector((state) => state.date.day);
 
   return (
     <div
